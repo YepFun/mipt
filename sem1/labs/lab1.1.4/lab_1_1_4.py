@@ -1,67 +1,166 @@
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
+import math
 
-data_table = pd.read_csv('data.csv')
-print(data_table)
+def group_data(data):
+    data_10 = [0] * 400
+    i = 0
+    while i < 400:
+        for j in range(10):
+            data_10[i] += int(data[i * 10 + j])
+        i += 1
 
-data_20 = data_table.to_numpy().flatten()
+    data_20 = [0] * 200
+    i = 0
+    while i < 200:
+        for j in range(20):
+            data_20[i] += int(data[i * 20 + j])
+        i += 1
 
-values_10 = np.array([i for i in range(3, 24)] + [25, 27, 28])
-counts_10 = np.array([1, 2, 1, 2, 5, 8, 17, 34, 32,
-                      40, 38, 43, 33, 31, 36, 28, 12, 18,
-                      10, 4, 1, 1, 2, 1])
-data_10 = []
-for i in range(len(values_10)):
-    data_10 += [values_10[i]] * counts_10[i]
-data_10 = np.array(data_10)
+    data_40 = [0] * 100
+    i = 0
+    while i < 100:
+        for j in range(40):
+            data_40[i] += int(data[i * 40 + j])
+        i += 1
 
-hist_10 = pd.DataFrame(np.vstack((values_10, counts_10)))
-print(hist_10)
+    data_80 = [0] * 50
+    i = 0
+    while i < 50:
+        for j in range(80):
+            data_80[i] += int(data[i * 80 + j])
+        i += 1
 
-def to_latex(s):
-    return ' & '.join([*map(str, list(s))])
+    return data_10, data_20, data_40, data_80
 
-values_20, counts_20 = np.unique(data_20, return_counts=True)
+def print_tables(data_10, data_20, data_40, data_80):
+    print("\ndata_10:")
+    i, j = 0, 0
+    while i < 400:
+        while j < 20:
+            for k in range(20):
+                print(data_10[i], end=" ")
+                i += 1
+            print("")
+            j += 1
 
-data_40 = np.empty(100, dtype=int)
-for i in range(100):
-    data_40[i] = data_20[2*i] + data_20[2*i + 1]
-values_40, counts_40 = np.unique(data_40, return_counts=True)
-print(values_40, counts_40)
+    print("\ndata_20:")
+    i, j = 0, 0
+    while i < 200:
+        while j < 20:
+            for k in range(10):
+                print(data_20[i], end=" ")
+                i += 1
+            print("")
+            j += 1
 
-a, b = 22, 33
-print(to_latex(values_40[a:b]))
-print(to_latex(counts_40[a:b]))
-print(to_latex(counts_40[a:b]/100))
+    print("\ndata_40:")
+    i, j = 0, 0
+    while i < 100:
+        while j < 10:
+            for k in range(10):
+                print(data_40[i], end=" ")
+                i += 1
+            print("")
+            j += 1
 
-print(np.sum(data_40)/100)
+    print("\ndata_80:")
+    i, j = 0, 0
+    while i < 5:
+        while j < 10:
+            for k in range(5):
+                print(data_80[i], end=" ")
+                i += 1
+            print("")
+            j += 1
 
-print(np.sum(data_10)/400)
+def print_histogram_data(data_10, data_20, data_40, data_80):
+    print("\nHistogram Data")
+    print("\ndata_10:")
+    for i in range(18):
+        print(i, data_10.count(i), data_10.count(i) / 400)
 
-fig, ax1 = plt.subplots()
-fig.set_figheight(16)
-fig.set_figwidth(20)
+    print("\ndata_20:")
+    for i in range(7, 34):
+        print(i, data_20.count(i), data_20.count(i) / 200)
 
-color = 'tab:red'
-ax1.set_xlabel('$n$  (10с)', fontsize=30, color=color)
-ax1.set_ylabel(r'$\omega$', fontsize=30)
-ax1.hist(data_10, np.arange(0, 31), alpha=0.5, density=True, label='10с', color=color)
+    print("\ndata_40:")
+    for i in range(20, 52):
+        print(i, data_40.count(i), data_40.count(i) / 100)
 
-ax1.tick_params(axis='x', labelcolor=color,  labelsize=30)
-ax1.tick_params(axis='y', labelcolor='#000000',  labelsize=30)
-plt.legend(loc='upper left', fontsize=30)
-
-color = 'tab:blue'
-ax2 = ax1.twiny()
-ax2.set_xlabel('$n$  (40с)', fontsize=30, color=color)
-
-ax2.hist(data_40, np.arange(0, 121), alpha=0.5, density=True, label='40с')
-ax2.tick_params(axis='x', labelcolor=color, labelsize=30)
-fig.tight_layout()
-plt.legend(loc='upper right', fontsize=30)
-plt.savefig('histogram.png')
-plt.show()
+    print("\ndata_80:")
+    for i in range(55, 96):
+        print(i, data_80.count(i), data_80.count(i) / 50)
 
 
+with open('lab_data_bare.txt') as f:
+    data = f.readlines()
 
+data_10, data_20, data_40, data_80 = group_data(data)
+
+#print_tables(data_10, data_20, data_40, data_80)
+#print_histogram_data(data_10, data_20, data_40, data_80)
+
+sum_10, sum_20, sum_40, sum_80 = 0, 0, 0, 0
+sq_sum_10, sq_sum_20, sq_sum_40, sq_sum_80 = 0, 0, 0, 0
+for i in range(len(data_10)):
+    sum_10 += data_10[i]
+for i in range(len(data_20)):
+    sum_20 += data_20[i]
+for i in range(len(data_40)):
+    sum_40 += data_40[i]
+for i in range(len(data_80)):
+    sum_80 += data_80[i]
+print("sum:", sum_10, sum_20, sum_40, sum_80)
+average_10, average_20, average_40, average_80 = sum_10/400, sum_20/200, sum_40/100, sum_80/50
+print("average:", average_10, average_20, average_40, average_80)
+
+for i in range(len(data_10)):
+    sq_sum_10 += (data_10[i] - average_10) ** 2
+for i in range(len(data_20)):
+    sq_sum_20 += (data_20[i] - average_20) ** 2
+for i in range(len(data_40)):
+    sq_sum_40 += (data_40[i] - average_40) ** 2
+for i in range(len(data_80)):
+    sq_sum_80 += (data_80[i] - average_80) ** 2
+
+sq_sigma_10, sq_sigma_20, sq_sigma_40, sq_sigma_80 = sq_sum_10/400, sq_sum_20/200, sq_sum_40/100, sq_sum_80/50
+sigma_10, sigma_20, sigma_40, sigma_80 = math.sqrt(sq_sigma_10), math.sqrt(sq_sigma_20), math.sqrt(sq_sigma_40), math.sqrt(sq_sigma_80)
+print("sq_sum:", sq_sum_10, sq_sum_20, sq_sum_40, sq_sum_80)
+print("sq_sigma:", sq_sigma_10, sq_sigma_20, sq_sigma_40, sq_sigma_80)
+print("sigma:", sigma_10, sigma_20, sigma_40, sigma_80)
+print("2 * sigma:", 2 * sigma_10, 2 * sigma_20, 2 * sigma_40, 2 * sigma_80)
+
+print("sqrt_average:", math.sqrt(average_10), math.sqrt(average_20), math.sqrt(average_40), math.sqrt(average_80))
+print("")
+
+count_s_10, count_s_20, count_s_40, count_s_80 = 0, 0, 0, 0
+count_2s_10, count_2s_20, count_2s_40, count_2s_80 = 0, 0, 0, 0
+for i in range(len(data_10)):
+    if abs(data_10[i] - average_10) <= sigma_10:
+        count_s_10 += 1
+    if abs(data_10[i] - average_10) <= 2 * sigma_10:
+        count_2s_10 += 1
+for i in range(len(data_20)):
+    if abs(data_20[i] - average_20) <= sigma_20:
+        count_s_20 += 1
+    if abs(data_20[i] - average_20) <= 2 * sigma_20:
+        count_2s_20 += 1
+for i in range(len(data_40)):
+    if abs(data_40[i] - average_40) <= sigma_40:
+        count_s_40 += 1
+    if abs(data_40[i] - average_40) <= 2 * sigma_40:
+        count_2s_40 += 1
+for i in range(len(data_80)):
+    if abs(data_80[i] - average_80) <= sigma_80:
+        count_s_80 += 1
+    if abs(data_80[i] - average_80) <= 2 * sigma_80:
+        count_2s_80 += 1
+
+print("count_s:", count_s_10, count_s_20, count_s_40, count_s_80)
+print(count_s_10/400, count_s_20/200, count_s_40/100, count_s_80/50)
+print("count_2s:", count_2s_10, count_2s_20, count_2s_40, count_2s_80)
+print(count_2s_10/400, count_2s_20/200, count_2s_40/100, count_2s_80/50)
+
+sigma_st_10, sigma_st_20, sigma_st_40, sigma_st_80 = sigma_10/math.sqrt(400), sigma_20/math.sqrt(200), sigma_40/math.sqrt(100), sigma_80/math.sqrt(50)
+print("sigma_st:", sigma_st_10, sigma_st_20, sigma_st_40, sigma_st_80)
+
+print("e:", sigma_st_10/average_10, sigma_st_20/average_20, sigma_st_40/average_40, sigma_st_80/average_80)
