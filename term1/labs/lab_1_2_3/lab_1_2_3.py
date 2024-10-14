@@ -34,7 +34,7 @@ def graph():
     with open('data.txt', 'r') as f:
         for line in f:
             x, y = line.strip().split()
-            x_data.append(float(x) * float(x) * 0.001)  # Трансформация для h^2
+            x_data.append(float(x))  
             y_data.append(float(y))
 
     # Преобразуем списки в массивы numpy для удобства расчетов
@@ -54,9 +54,9 @@ def graph():
     plt.plot(x_data, y_fit, linestyle='--', color='r', label=f'Fit: y = {k:.2f}x + {b:.2f}')
 
     # Настройка графика
-    plt.title('T(h^2)')
-    plt.xlabel('h^2, 10^{-3} * m^2')
-    plt.ylabel('T, s')
+    plt.title('I(h^2)')
+    plt.xlabel('h^2, 10^3 * m^2')
+    plt.ylabel('I, 10^3 kg * m^2')
     plt.legend()
 
     # Включаем основную сетку
@@ -74,3 +74,28 @@ def graph():
 
 general()
 graph()
+
+def I(k, m, t):
+    i = k * m * t * t
+    eps_i = math.sqrt((0.05/4.02) * (0.05/4.02) + 2 * (0.002/t) * (0.002/t) + (0.0003/m) * (0.3/m))
+    sigma_i = i * eps_i
+    return i, sigma_i, eps_i
+
+def print_I(k, m, t):
+    i, sigma_i, eps_i = I(k, m, t)
+    print(i, "+-", sigma_i, "| eps =", eps_i * 100, "%")
+
+k = 4.02e-4
+eps_k = 0.012
+m_platform = 1066.8e-3
+m_cylinder = 737.4e-3
+m_block = 1199.4e-3
+t_platform = 4.368
+t_cylinder = 4.227
+t_block = 3.745
+t_block_and_cylinder = 3.821
+
+print_I(k, m_platform, t_platform)
+print_I(k, m_platform + m_cylinder, t_cylinder)
+print_I(k, m_platform + m_block, t_block)
+print_I(k, m_platform + m_block + m_cylinder, t_block_and_cylinder)

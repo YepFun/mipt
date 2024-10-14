@@ -1,8 +1,8 @@
+#include <algorithm>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
 #include <vector>
-#include <algorithm>
 
 const int cMod = 10004321;
 const int c123 = 123;
@@ -14,7 +14,7 @@ void GenerateVector(std::vector<int>& a) {
   }
 }
 
-int Partition(std::vector<int>& a, int& left, int& right, int& pivot) {
+int Partition(std::vector<int>& a, int left, int right, int pivot) {
   int a_pivot = a[pivot];
   std::swap(a[right], a[pivot]);
   int j = left;
@@ -29,18 +29,23 @@ int Partition(std::vector<int>& a, int& left, int& right, int& pivot) {
 }
 
 int QuickSelect(std::vector<int>& a, int left, int right, int k) {
+  int pivot = -1;
   if (left == right) {
     return a[left];
   }
-  int pivot = left + rand() * (right - left + 1);
-  pivot = Partition(a, left, right, pivot); 
+  if (right - left + 1 == 0) {
+    std::cout << "Error: Division by zero\n";
+  } else {
+    pivot = left + rand() % (right - left + 1);
+  }
+  pivot = Partition(a, left, right, pivot);
   if (pivot == k) {
     return a[k];
-  } else if (pivot > k) {
-    return QuickSelect(a, left, pivot - 1, k);
-  } else {
-    return QuickSelect(a, pivot + 1, right, k);
   }
+  if (pivot > k) {
+    return QuickSelect(a, left, pivot - 1, k);
+  }
+  return QuickSelect(a, pivot + 1, right, k);
 }
 
 int main() {
