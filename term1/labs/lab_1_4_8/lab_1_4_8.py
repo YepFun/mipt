@@ -57,9 +57,9 @@ def graph():
     plt.plot(x_data3, y_data3, marker='o', linestyle='', color='black', label='steel')
 
     # Построение прямой регрессии
-    plt.plot(x_data1, y_fit1, linestyle='--', color='black', label=f'Fit: y = {k1:.2f}x + {b1:.2f}')
-    plt.plot(x_data2, y_fit2, linestyle='--', color='black', label=f'Fit: y = {k2:.2f}x + {b2:.2f}')
-    plt.plot(x_data3, y_fit3, linestyle='--', color='black', label=f'Fit: y = {k3:.2f}x + {b3:.2f}')
+    plt.plot(x_data1, y_fit1, linestyle='--', color='black', label=f'Fit: y = {k1:.4f}x + {b1:.4f}')
+    plt.plot(x_data2, y_fit2, linestyle='--', color='black', label=f'Fit: y = {k2:.4f}x + {b2:.4f}')
+    plt.plot(x_data3, y_fit3, linestyle='--', color='black', label=f'Fit: y = {k3:.4f}x + {b3:.4f}')
 
     # Настройка графика
     plt.title('f_n(n)')
