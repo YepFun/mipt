@@ -15,8 +15,8 @@ def read_file(file_path):
 
     for line in lines[5:]:
         values = list(map(float, line.split()))
-        m2.append(values[0])
-        delta_x2.append(values[1])
+        m2.append(values[0] * 1e-3)
+        delta_x2.append(values[1] * 1e-3)
 
     return m1, x_left, x_right, m2, delta_x2
 
@@ -50,19 +50,46 @@ def analyze_part_1(m1, x_left, x_right):
 
     return delta_x1, u, eps_u, sigma_u, average_m1, average_delta_x1, average_u, average_sigma_u
 
-def analyze_part_2(m2, delta_x2):
+def analyze_part_2(m_bullet, x):
     # Параметры установки
-    r = 205
-    sigma_r = 1
-    R = (728 - 55) / 2
-    sigma_R = 1
-    m1 = 735.6
-    m2 = 733.3
+    r = 205 * 1e-3
+    sigma_r = 1 * 1e-3
+    R = (728 - 55) / 2 * 1e-3
+    sigma_R = 1 * 1e-3
+    d = 1348 * 1e-3
+    m1 = 735.6 * 1e-3
+    m2 = 733.3 * 1e-3
     m = (m1 + m2) / 2
     sigma_m = (m1 - m2) / 2
 
+    T1 = (6.667 + 6.713 + 6.712) / 3
+    T2 = (4.991 + 4.988 + 4.997) / 3
+    sigma_T1 = (abs(T1 - 6.667) + abs(T1 - 6.713) + abs(T1 - 6.712)) / 3
+    sigma_T2 = (abs(T2 - 4.991) + abs(T2 - 4.988) + abs(T2 - 4.997)) / 3
+    print("T_1 =", T1, "+-", sigma_T1)
+    print("T_2 =", T2, "+-", sigma_T2)
+    sqrt_kI = 4 * math.pi * m * R * R * T1 / (T1 * T1 - T2 * T2)
+    sigma_sqrt_kI = sqrt_kI * (sigma_m/m + 2 * sigma_R / R - (T1 * T1 + T2 * T2) / (T1 * T1 - T2 * T2) * sigma_T1 / T1 - 2 * T2 * sigma_T2 / (T1 * T1 - T2 * T2))
+    print("sqrt_kI =", sqrt_kI, "+-", sigma_sqrt_kI)
+
+    u = []
+    eps_u = []
+    sigma_u = []
+    sum_u = 0
+    for i in range(len(x)):
+        if (2 * d * m_bullet[i] * r) != 0:
+            u.append(x[i] * sqrt_kI * 1e9 / (   qd * m_bullet[i] * r * 1e9))
+            sum_u += u[i]
+            eps_u.append(math.sqrt((1e-3 / x[i]) * (1e-3 / x[i]) + (1/1348) * (1/1348) + (sigma_sqrt_kI/sqrt_kI) * (sigma_sqrt_kI/sqrt_kI) + (1e-6 / m_bullet[i]) * (1e-6 / m_bullet[i]) + (sigma_r / r) * sigma_r / r))
+            sigma_u.append(u[i] * eps_u[i])
+            print(u[i], sigma_u[i], eps_u[i])
+        else:
+            print('is zero')
+    print("u_average =", sum_u / 5)
+    return
+
 def print_table_1(m1, x_left, x_right, delta_x1, u, eps_u, sigma_u):
-    header = f"{'m1':>10} {'x_left':>10} {'x_right':>10} {'delta_x1':>10} {'u':>15} {'eps_u':>10} {'sigma_u':>10}"
+    header = f"{'m1':>10} {'x_left':>10} {'x_right':>10} {'delta_x':>10} {'u':>15} {'eps_u':>10} {'sigma_u':>10}"
     print(header)
     print("-" * len(header))
 
@@ -80,3 +107,6 @@ file_path = 'data.txt'
 m1, x_left, x_right, m2, delta_x2 = read_file(file_path)
 delta_x1, u, eps_u, sigma_u, average_m1, average_delta_x1, average_u, average_sigma_u = analyze_part_1(m1, x_left, x_right)
 print_table_1(m1, x_left, x_right, delta_x1, u, eps_u, sigma_u)
+analyze_part_2(m2, delta_x2)
+
+
