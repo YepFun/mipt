@@ -1,0 +1,141 @@
+\documentclass[a4paper,12pt]{article} % тип документа
+
+% Поля страниц
+\usepackage[left=2.5cm,right=2.5cm,
+    top=2cm,bottom=2cm,bindingoffset=0cm]{geometry}
+    
+%Пакет дял таблиц   
+\usepackage{multirow} 
+    
+%Отступ после заголовка    
+\usepackage{indentfirst}
+
+
+% Рисунки
+\usepackage{floatrow,graphicx,calc}
+\usepackage{wrapfig}
+
+%%% Работа с картинками
+\usepackage{graphicx}  % Для вставки рисунков
+\graphicspath{{images/}}  % папки с картинками
+\setlength\fboxsep{3pt} % Отступ рамки \fbox{} от рисунка
+\setlength\fboxrule{1pt} % Толщина линий рамки \fbox{}
+\usepackage{wrapfig} % Обтекание рисунков и таблиц текстом
+
+% Создаём новый разделитель
+\DeclareFloatSeparators{mysep}{\hspace{1cm}}
+
+% Ссылки?
+\usepackage{hyperref}
+\usepackage[rgb]{xcolor}
+\hypersetup{				% Гиперссылки
+    colorlinks=true,       	% false: ссылки в рамках
+	urlcolor=blue          % на URL
+}
+
+
+%  Русский язык
+\usepackage[T2A]{fontenc}			% кодировка
+\usepackage[utf8]{inputenc}			% кодировка исходного текста
+\usepackage[english,russian]{babel}	% локализация и переносы
+
+% Математика
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools}
+
+%%% Дополнительная работа с математикой
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
+\usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+
+% Что-то 
+\usepackage{wasysym}
+
+
+\begin{document}
+\begin{center}
+	\footnotesize{ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ АВТОНОМНОЕ ОБРАЗОВАТЕЛЬНОЕ 			УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ}\\
+	\footnotesize{МОСКОВСКИЙ ФИЗИКО-ТЕХНИЧЕСКИЙ ИНСТИТУТ\\(НАЦИОНАЛЬНЫЙ 			ИССЛЕДОВАТЕЛЬСКИЙ УНИВЕРСИТЕТ)}\\
+	\footnotesize{ФИЗТЕХ-ШКОЛА ФИЗИКИ И ИССЛЕДОВАНИЙ им. ЛАНДАУ\\}
+	\hfill \break
+	\hfill \break
+	\hfill \break
+	\hfill \break
+\end{center}
+
+\begin{center}   
+    \hfill \break
+	\hfill \break
+	\hfill \break
+	\hfill \break    \hfill \break
+	\hfill \break
+	\hfill \break
+	\hfill \break
+    \hfill \break
+    \hfill \break
+	\hfill \break
+	\large{Лабораторная работа № \\\textbf{}}\\
+	\begin{flushright}
+		Плотникова Анастасия Александровна\\
+		Группа Б02-406
+	\end{flushright}
+	\hfill \break
+	\hfill \break
+	\hfill \break
+\end{center}
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+\begin{center}
+	Долгопрудный, 2025 г.
+\end{center}
+\thispagestyle{empty}
+\newpage
+	\textbf{Цель работы:}\\ 
+	\hfill \break
+	
+	\textbf{В работе используются:}\\ 
+	
+\section{Теоретическая справка}
+
+\section{Экспериментальная установка}
+
+Схема установки изображена на рисунке (\ref{}). 
+
+\section{Ход эксперимента}
+
+\begin{enumerate}
+  \item
+\end{enumerate}
+
+\section{Результаты измерений}
+
+\begin{table}[h]
+  \caption{}
+  \begin{tabular}{|c|c|c|}
+      \hline $T$, $^\circ C$  &  $\Delta h$, мм & $P$, Па \\
+      \hline  &  &  \\
+      \hline  &  &  \\
+      \hline  &  &  \\
+      \hline  &  &  \\
+      \hline  &  &  \\
+      \hline  &  &  \\
+      \hline  &  &  \\
+      \hline  &  &  \\
+      \hline  &  &  \\
+      \hline  &  &  \\
+      \hline 
+  \end{tabular}
+  \label{tab:}
+\end{table}
+
+\section{Вывод}
+\end{document}
