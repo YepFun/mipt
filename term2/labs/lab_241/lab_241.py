@@ -31,27 +31,21 @@ dT_K = dT  # Погрешность температуры в Кельвинах
 d_inv_T_K = dT_K / (T_K**2)  # Погрешность для 1/T_K
 d_lnP = dP / P  # Погрешность для lnP (относительная погрешность)
 
-# Проверка количества элементов
-print(f"Количество значений в T: {len(T)}")
-print(f"Количество значений в P: {len(P)}")
-print(f"Количество значений в dT: {len(dT)}")
-print(f"Количество значений в dP: {len(dP)}")
-
-# Подбор линейной регрессии (мнк) для ln(P) от 1/T_K
-coeffs = np.polyfit(inv_T_K, lnP, 1)  # Коэффициенты прямой (угловой и свободный)
-slope = coeffs[0]  # Угловой коэффициент
-intercept = coeffs[1]  # Свободный член
-
 # График 1: P(T) с погрешностями
 plt.figure(figsize=(8, 6))
-plt.errorbar(T, P, xerr=dT, yerr=dP, fmt='o', markersize=6, ecolor='red', capsize=3, label="Экспериментальные данные")
+
+# Переименование осей
+P_kPa = P * 1e-3
+dP_kPa = dP * 1e-3
+
+plt.errorbar(T, P_kPa, xerr=dT, yerr=dP_kPa, fmt='o', markersize=6, ecolor='red', capsize=3, label="Экспериментальные данные")
 
 # Установка масштабов осей, чтобы все точки были видны
 plt.xlim(min(T) - 1, max(T) + 1)  # Добавляем запас к осям
-plt.ylim(min(P) - 500, max(P) + 500)
+plt.ylim(min(P_kPa) - 0.5, max(P_kPa) + 0.5)
 
 plt.xlabel("Температура T, °C")
-plt.ylabel("Давление P, Па")
+plt.ylabel("Давление P, кПа")
 plt.title("Зависимость P от T с учетом погрешностей")
 plt.grid(True, linestyle="--", alpha=0.7)
 plt.legend()
@@ -63,17 +57,27 @@ plt.close()
 
 # График 2: ln(P) от 1/T_K с погрешностями
 plt.figure(figsize=(8, 6))
-plt.errorbar(inv_T_K, lnP, xerr=d_inv_T_K, yerr=d_lnP, fmt='o', markersize=6, ecolor='blue', capsize=3, label="Экспериментальные данные")
+
+# Переименование осей
+inv_T_K_1en3K = inv_T_K * 1e3
+d_inv_T_K_1en3K = d_inv_T_K * 1e3
+
+# Подбор линейной регрессии (мнк) для ln(P) от 1/T_K
+coeffs = np.polyfit(inv_T_K_1en3K, lnP, 1)  # Коэффициенты прямой (угловой и свободный)
+slope = coeffs[0]  # Угловой коэффициент
+intercept = coeffs[1]  # Свободный член
+
+plt.errorbar(inv_T_K_1en3K, lnP, xerr=d_inv_T_K_1en3K, yerr=d_lnP, fmt='o', markersize=6, ecolor='blue', capsize=3, label="Экспериментальные данные")
 
 # Линия, полученная методом наименьших квадратов
-plt.plot(inv_T_K, np.polyval(coeffs, inv_T_K), 'g--', label=f"Линия МНК: $y = {slope:.3f}x + {intercept:.3f}$")
+plt.plot(inv_T_K_1en3K, np.polyval(coeffs, inv_T_K_1en3K), 'r--', label=f"Линия МНК: $y = {slope:.3f}x + {intercept:.3f}$")
 
 # Установка масштабов осей
-plt.xlim(min(inv_T_K) - 0.00001, max(inv_T_K) + 0.00001)
+plt.xlim(min(inv_T_K_1en3K) - 0.01, max(inv_T_K_1en3K) + 0.01)
 plt.ylim(min(lnP) - 0.05, max(lnP) + 0.05)
 
-plt.xlabel("Обратная температура 1/T_K, 1/K")
-plt.ylabel("Логарифм давления ln(P)")
+plt.xlabel("Обратная температура 1/T_K, $10^{-3}$ 1/K")
+plt.ylabel("Логарифм давления ln(P), 1")
 plt.title("Зависимость ln(P) от 1/T_K с учетом погрешностей")
 plt.grid(True, linestyle="--", alpha=0.7)
 plt.legend()
@@ -87,10 +91,10 @@ plt.close()
 print(f"Угловой коэффициент (slope) линии МНК: {slope:.3f}")
 
 # Данные из таблицы
-L = [53000, 49000, 58000, 51000, 43200, 42400, 42300, 43300, 45500, 
-            31800, 36700, 44000, 38300, 49400, 41200, 34300, 50000, 46000, 32900]
-dL = [3000, 2000, 2000, 1000, 1100, 1100, 1100, 900, 500, 300, 400, 600, 
-             500, 700, 600, 600, 800, 600, 400]
+L = [53, 49, 58, 51, 43.2, 42.400, 42.300, 43.300, 45.500, 
+            31.800, 36.700, 44.000, 38.300, 49.400, 41.200, 34.300, 50.000, 46.000, 32.900]
+dL = [3.000, 2.000, 2.000, 1.000, 1.100, 1.100, 1.100, 0.900, 0.500, 0.300, 0.400, 0.600, 
+             0.500, 0.700, 0.600, 0.600, 0.800, 0.600, 0.400]
 T = np.array([294.16, 295.21, 296.18, 297.15, 298.18, 299.15, 300.15, 301.17, 302.16, 
               303.18, 304.16, 305.21, 306.18, 307.18, 308.16, 309.14, 310.16, 311.15, 312.16])
 dT = 0.03
@@ -99,11 +103,12 @@ plt.figure(figsize=(8, 6))
 plt.errorbar(T, L, xerr=dT, yerr=dL, fmt='o', color='b', ecolor='r', capsize=3, label=r'$L(T)$')
 
 # Подписи осей и заголовок
-plt.xlabel("$T, K$")
-plt.ylabel("$L$")
-plt.title("График зависимости $L(T)$ с учётом погрешностей")
+plt.xlabel("Температура $T$, K")
+plt.ylabel("Молярная теплота испарения $L$, кДж/моль")
+plt.title("Зависимость $L(T)$ с учётом погрешностей")
 plt.legend()
-plt.grid(True, linestyle='--', alpha=0.6)
+plt.grid(True, linestyle='--', alpha=0.7)
+plt.tight_layout()
 
 # Показать график
 plt.savefig("images/graph3.png")
