@@ -102,8 +102,8 @@ bool FindPairSorted(const std::vector<int>& arr, int sum) {
 int main() {
   int search_values[] = {-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
   int random_values[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-  const int cIterations = 25;
-  const int cMax_size = 25000;
+  const int cIterations = 250;
+  const int cMax_size = 2500;
 
   // std::vector<int> sizes = {100, 500, 1000, 5000, 10000, 50000, 100000, 500000, 1000000}; 
 
@@ -111,7 +111,7 @@ int main() {
   file_search << "N Linear_Avg Linear_Worst Binary_Avg Binary_Worst\n";
   
   // for (int size : sizes) {  
-  /* for (int size = 100; size < cMax_size; size += 100) {
+  for (int size = 50; size < cMax_size; size += 25) {
     std::vector<int> arr = GenerateRandomVector(size);
     std::vector<int> sorted_arr = GenerateRandomSortedVector(size);
 
@@ -131,9 +131,8 @@ int main() {
     file_search << size << " " << linear_avg_time << " " << linear_worst_time << " " << binary_avg_time << " " << binary_worst_time << "\n";
   }
   file_search.close();
-  */
-
-  std::ofstream file_pair("data/data_pair.txt");
+  
+  /* std::ofstream file_pair("data/data_pair.txt");
   file_pair << "N FindPair_Avg FindPair_Worst FindPairSorted_Avg FindPairSorted_Worst\n";
   
   for (int size = 5; size < cMax_size; size += 5) {
@@ -157,6 +156,7 @@ int main() {
     file_pair << size << " " << find_pair_avg_time << " " << find_pair_worst_time << " " << find_pair_sorted_avg_time << " " << find_pair_sorted_worst_time << "\n";
   }
   file_pair.close();
+  */
 
   return 0;
 }
