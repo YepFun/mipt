@@ -38,7 +38,7 @@ D_atm = slope * inv_P_atm + intercept
 plt.scatter(inv_P_atm, D_atm, color='black', zorder=5, label=f'P = 760 торр: ({inv_P_atm:.4e}, {D_atm:.2f})')
 
 # Настройка масштабов осей
-plt.xlim(inv_P_atm - 0.002, max(inv_P_extended) + 0.0035)  # Устанавливаем x-ограничения
+plt.xlim(inv_P_atm - 0.002, max(inv_P_extended) + 0.004)  # Устанавливаем x-ограничения
 plt.ylim(D_atm - 0.7, max(D) + 1.2)  # Устанавливаем y-ограничения
 
 # Настройки графика
@@ -55,3 +55,10 @@ plt.savefig("images/graph_D_1P.png")
 # Вывод коэффициента наклона и его погрешности
 print(f'Коэффициент наклона: {slope:.4f} ± {std_err:.4f}')
 print(f'Точка для P = 760 торр: ({inv_P_atm:.4e}, {D_atm:.2f})')
+
+# Рассчитываем погрешность для k (коэффициента поглощения)
+# Погрешность наклона
+k_error = std_err
+
+# Вывод погрешности k
+print(f'Погрешность коэффициента поглощения k: {k_error:.4f}')
