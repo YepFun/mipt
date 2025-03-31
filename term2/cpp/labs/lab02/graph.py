@@ -7,7 +7,7 @@ data = pd.read_csv('data/results_static.csv')
 # Графики времени сортировок
 plt.figure(figsize=(10, 6))
 
-plt.plot(data['Size'], data['ShakerSortTime'], label='ShakerSort', marker='o')
+# plt.plot(data['Size'], data['ShakerSortTime'], label='ShakerSort', marker='o')
 plt.plot(data['Size'], data['CombSortTime'], label='CombSort', marker='o')
 plt.plot(data['Size'], data['ShellSortStandardTime'], label='ShellSort (Standard)', marker='o')
 plt.plot(data['Size'], data['ShellSortFibTime'], label='ShellSort (Fibonacci Reversed)', marker='o')
@@ -24,7 +24,7 @@ plt.savefig("graph/time.png")
 # Графики количества перестановок
 plt.figure(figsize=(10, 6))
 
-plt.plot(data['Size'], data['ShakerSortSwaps'], label='ShakerSort', marker='o')
+# plt.plot(data['Size'], data['ShakerSortSwaps'], label='ShakerSort', marker='o')
 plt.plot(data['Size'], data['CombSortSwaps'], label='CombSort', marker='o')
 plt.plot(data['Size'], data['ShellSortStandardSwaps'], label='ShellSort (Standard)', marker='o')
 plt.plot(data['Size'], data['ShellSortFibSwaps'], label='ShellSort (Fibonacci Reversed)', marker='o')

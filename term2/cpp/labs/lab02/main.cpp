@@ -30,18 +30,20 @@ std::vector<int> GenerateRandomVector(int size) {
   return arr;
 }
 
-void CombSort(std::vector<int>& arr, long long& swaps) {
-  int gap = arr.size();
-  bool swapped = true;
-  while (gap > 1 || swapped) {
-    gap = std::max(1, (int)(gap / 1.3));
+void BubbleSort(std::vector<int>& arr, long long& swaps) {
+  swaps = 0;
+  bool swapped;
+  for (size_t i = 0; i < arr.size(); ++i) {
     swapped = false;
-    for (size_t i = 0; i + gap < arr.size(); ++i) {
-      if (arr[i] > arr[i + gap]) {
-        std::swap(arr[i], arr[i + gap]);
-        swapped = true;
-        swaps++;
+    for (size_t j = 0; j + 1 < arr.size() - i; ++j) {
+      if (arr[j] > arr[j + 1]) {
+          std::swap(arr[j], arr[j + 1]);
+          swaps++;
+          swapped = true;
       }
+    }
+    if (!swapped) {
+      break; 
     }
   }
 }
@@ -70,6 +72,22 @@ void ShakerSort(std::vector<int>& arr, unsigned begin_idx, unsigned end_idx, lon
     --end_idx;
     BackwardStep(arr, begin_idx, end_idx, swaps);
     ++begin_idx;
+  }
+}
+
+void CombSort(std::vector<int>& arr, long long& swaps) {
+  int gap = arr.size();
+  bool swapped = true;
+  while (gap > 1 || swapped) {
+    gap = std::max(1, (int)(gap / 1.3));
+    swapped = false;
+    for (size_t i = 0; i + gap < arr.size(); ++i) {
+      if (arr[i] > arr[i + gap]) {
+        std::swap(arr[i], arr[i + gap]);
+        swapped = true;
+        swaps++;
+      }
+    }
   }
 }
 
