@@ -1,0 +1,195 @@
+Last login: Tue Mar 25 12:12:42 on ttys000
+plotnii@Plotniis-MacBook-Air ~ % cd Documents/__mipt/term2/cpp/labs/lab02
+plotnii@Plotniis-MacBook-Air lab02 % g++ -std=c++17 sorting_algorithms.cpp -o t
+plotnii@Plotniis-MacBook-Air lab02 % ./t
+Shaker Sort: 0 1 2 3 4 5 6 7 8 9 
+Comb Sort: 0 1 2 3 4 5 6 7 8 9 
+Shell Sort (Hibbard): 0 1 2 3 4 5 6 7 8 9 
+plotnii@Plotniis-MacBook-Air lab02 % g++ -std=c++17 sorting_algorithms.cpp -o t
+plotnii@Plotniis-MacBook-Air lab02 % ./t                                       
+Shaker Sort: 0 1 2 3 4 5 6 7 8 9 
+Comb Sort: 0 1 2 3 4 5 6 7 8 9 
+Shell Sort (Hibbard): 0 1 2 3 4 5 6 7 8 9 
+plotnii@Plotniis-MacBook-Air lab02 % g++ -std=c++17 main.cpp -o t
+plotnii@Plotniis-MacBook-Air lab02 % ./t                         
+Size: 1000 | CombSort: 0.333317 ms | ShellSort (Hibbard): 0.320443 ms
+Size: 6000 | CombSort: 3.02943 ms | ShellSort (Hibbard): 2.72138 ms
+Size: 11000 | CombSort: 6.01433 ms | ShellSort (Hibbard): 5.56243 ms
+Size: 16000 | CombSort: 8.00383 ms | ShellSort (Hibbard): 8.72388 ms
+Size: 21000 | CombSort: 10.1224 ms | ShellSort (Hibbard): 8.79153 ms
+Size: 26000 | CombSort: 10.7368 ms | ShellSort (Hibbard): 11.2528 ms
+Size: 31000 | CombSort: 13.6113 ms | ShellSort (Hibbard): 14.1479 ms
+Size: 36000 | CombSort: 15.8896 ms | ShellSort (Hibbard): 16.3372 ms
+Size: 41000 | CombSort: 18.1926 ms | ShellSort (Hibbard): 19.3275 ms
+Size: 46000 | CombSort: 19.2659 ms | ShellSort (Hibbard): 21.9645 ms
+Size: 51000 | CombSort: 23.587 ms | ShellSort (Hibbard): 27.1477 ms
+Size: 56000 | CombSort: 24.9882 ms | ShellSort (Hibbard): 29.0647 ms
+Size: 61000 | CombSort: 28.5464 ms | ShellSort (Hibbard): 31.958 ms
+Size: 66000 | CombSort: 32.5911 ms | ShellSort (Hibbard): 34.2519 ms
+Size: 71000 | CombSort: 34.6139 ms | ShellSort (Hibbard): 36.267 ms
+Size: 76000 | CombSort: 37.1883 ms | ShellSort (Hibbard): 42.5181 ms
+Size: 81000 | CombSort: 40.4079 ms | ShellSort (Hibbard): 44.8881 ms
+Size: 86000 | CombSort: 45.0605 ms | ShellSort (Hibbard): 47.9259 ms
+Size: 91000 | CombSort: 46.4723 ms | ShellSort (Hibbard): 51.0618 ms
+Size: 96000 | CombSort: 46.3785 ms | ShellSort (Hibbard): 49.9545 ms
+plotnii@Plotniis-MacBook-Air lab02 % g++ -std=c++17 main.cpp -o t
+main.cpp:140:82: error: no matching function for call to 'ShellSort'
+    long long shell_sort_hibbard_time = MeasureTime([&](std::vector<int>& arr) { ShellSort(arr, GenerateHibbardGaps(arr.size())); }, arr_shell_hibbard, 10);
+                                                                                 ^~~~~~~~~
+main.cpp:116:6: note: candidate function not viable: no known conversion from 'std::vector<int>' to 'std::vector<unsigned int> &' for 1st argument
+void ShellSort(std::vector<unsigned>& arr, std::vector<int> gaps) {
+     ^
+main.cpp:141:83: error: no matching function for call to 'ShellSort'
+    long long shell_sort_standard_time = MeasureTime([&](std::vector<int>& arr) { ShellSort(arr, GenerateShellGaps(arr.size())); }, arr_shell_standard, 10);
+                                                                                  ^~~~~~~~~
+main.cpp:116:6: note: candidate function not viable: no known conversion from 'std::vector<int>' to 'std::vector<unsigned int> &' for 1st argument
+void ShellSort(std::vector<unsigned>& arr, std::vector<int> gaps) {
+     ^
+main.cpp:142:78: error: no matching function for call to 'ShellSort'
+    long long shell_sort_fib_time = MeasureTime([&](std::vector<int>& arr) { ShellSort(arr, GenerateReverseFibonacciGaps(arr.size())); }, arr_shell_fib, 10);
+                                                                             ^~~~~~~~~
+main.cpp:116:6: note: candidate function not viable: no known conversion from 'std::vector<int>' to 'std::vector<unsigned int> &' for 1st argument
+void ShellSort(std::vector<unsigned>& arr, std::vector<int> gaps) {
+     ^
+3 errors generated.
+plotnii@Plotniis-MacBook-Air lab02 % g++ -std=c++17 main.cpp -o t
+plotnii@Plotniis-MacBook-Air lab02 % ./t                         
+Size: 1000 | CombSort: 0 ms | ShakerSort: 12 ms | ShellSort (Hibbard): 0 ms | ShellSort (Shell): 0 ms | ShellSort (RevFib): 0 ms
+Size: 6000 | CombSort: 4 ms | ShakerSort: 414 ms | ShellSort (Hibbard): 2 ms | ShellSort (Shell): 3 ms | ShellSort (RevFib): 4 ms
+Size: 11000 | CombSort: 9 ms | ShakerSort: 1402 ms | ShellSort (Hibbard): 6 ms | ShellSort (Shell): 6 ms | ShellSort (RevFib): 9 ms
+Size: 16000 | CombSort: 15 ms | ShakerSort: 2995 ms | ShellSort (Hibbard): 8 ms | ShellSort (Shell): 9 ms | ShellSort (RevFib): 13 ms
+Size: 21000 | CombSort: 20 ms | ShakerSort: 5330 ms | ShellSort (Hibbard): 12 ms | ShellSort (Shell): 12 ms | ShellSort (RevFib): 18 ms
+^C
+plotnii@Plotniis-MacBook-Air lab02 % g++ -std=c++17 main.cpp -o t
+plotnii@Plotniis-MacBook-Air lab02 % ./t                         
+Size: 1000 | CombSort: 0 ms, 0 swaps | ShakerSort: 10 ms, 0 swaps | ShellSort (Hibbard): 0 ms, 0 swaps | ShellSort (Standard): 0 ms, 0 swaps | ShellSort (Fib): 0 ms, 0 swaps
+Size: 6000 | CombSort: 3 ms, 0 swaps | ShakerSort: 373 ms, 0 swaps | ShellSort (Hibbard): 2 ms, 0 swaps | ShellSort (Standard): 2 ms, 0 swaps | ShellSort (Fib): 4 ms, 0 swaps
+Size: 11000 | CombSort: 8 ms, 0 swaps | ShakerSort: 1546 ms, 0 swaps | ShellSort (Hibbard): 5 ms, 0 swaps | ShellSort (Standard): 5 ms, 0 swaps | ShellSort (Fib): 9 ms, 0 swaps
+Size: 16000 | CombSort: 15 ms, 0 swaps | ShakerSort: 3142 ms, 0 swaps | ShellSort (Hibbard): 9 ms, 0 swaps | ShellSort (Standard): 9 ms, 0 swaps | ShellSort (Fib): 14 ms, 0 swaps
+Size: 21000 | CombSort: 21 ms, 0 swaps | ShakerSort: 5999 ms, 0 swaps | ShellSort (Hibbard): 34 ms, 0 swaps | ShellSort (Standard): 19 ms, 0 swaps | ShellSort (Fib): 27 ms, 0 swaps
+^C
+plotnii@Plotniis-MacBook-Air lab02 % g++ -std=c++17 main.cpp -o t
+plotnii@Plotniis-MacBook-Air lab02 % ./t
+1000,0,1307,11,227788,0,2408,0,2698,0,2227
+6000,3,9055,414,8313116,2,17921,2,21238,3,16472
+11000,7,23281,1426,35660685,4,47177,5,52404,8,43530
+16000,13,44105,4060,93507186,10,90821,11,133555,13,84320
+21000,20,71471,6529,192256357,13,146506,13,221313,32,139050
+26000,25,105407,9410,343478733,14,216093,14,314560,20,205515
+31000,30,145805,13528,558708285,18,301905,16,416679,26,285926
+36000,33,192590,17764,849466179,22,399076,31,560049,33,379778
+^C
+plotnii@Plotniis-MacBook-Air lab02 % g++ -std=c++17 draft.cpp -o t
+plotnii@Plotniis-MacBook-Air lab02 % ./t
+1000,0,1307,11,227788,0,2408,0,2698,0,2227
+6000,3,9055,392,8313116,2,17921,2,21238,3,16472
+^C
+plotnii@Plotniis-MacBook-Air lab02 % g++ -std=c++17 main.cpp -o t 
+plotnii@Plotniis-MacBook-Air lab02 % ./t
+100,0,126,0,2242,0,184,0,234,0,164
+200,0,375,0,10560,0,567,0,729,0,528
+300,0,776,1,29660,0,1139,0,1403,0,1152
+400,0,1307,1,63988,0,1957,0,2644,0,1901
+500,0,1951,2,120767,0,3125,0,3882,0,2920
+600,0,2686,3,199409,0,4510,0,5368,0,4110
+700,0,3590,4,309362,0,6150,0,6992,0,5579
+800,0,4603,5,450774,0,8100,0,10055,0,7372
+900,0,5771,7,631694,0,10239,0,12988,0,9382
+1000,0,7078,9,859482,0,12647,0,15686,0,11609
+1100,0,8533,12,1135339,0,15252,0,18504,0,14083
+1200,0,10091,14,1464391,0,18134,0,21985,0,16879
+1300,0,11775,18,1847693,0,21332,0,25506,0,19950
+1400,0,13605,19,2295598,0,24976,0,29477,0,23267
+1500,0,15622,22,2805942,0,28949,0,33290,0,26625
+1600,0,17728,27,3382544,0,33231,0,39918,0,30263
+1700,0,19954,29,4034120,0,37658,0,45532,0,34040
+1800,0,22320,35,4758517,0,42491,0,52080,0,38041
+1900,0,24782,36,5561779,0,47327,0,57242,0,42460
+2000,0,27457,40,6451578,0,52463,0,63839,0,46890
+2100,1,30219,44,7437724,0,57796,0,69727,1,51571
+2200,1,33117,47,8523777,0,63340,0,76664,1,56510
+2300,1,36015,54,9715603,0,69456,1,82931,1,61795
+2400,1,39095,63,11003570,0,75741,0,90762,1,67459
+2500,1,42402,66,12401993,0,82245,0,99085,1,73268
+2600,1,45772,72,13914521,0,88709,1,106974,1,79513
+2700,1,49326,81,15541418,1,95517,1,115538,1,85913
+2800,1,52985,82,17301850,0,102448,1,125035,1,92549
+2900,1,56623,87,19166928,0,109456,0,133463,1,99426
+3000,1,60479,96,21156862,0,116930,1,141931,1,106607
+3100,1,64546,101,23280406,1,124843,1,152081,1,113918
+3200,1,68694,113,25538955,1,133072,1,167514,1,121488
+3300,1,72978,118,27935151,1,141255,1,177563,1,129273
+3400,2,77355,131,30489847,1,149554,1,189361,2,137285
+3500,2,81818,135,33186713,1,158197,1,198826,2,145609
+3600,2,86491,194,36037822,1,167074,1,212422,1,154264
+3700,2,91314,233,39056765,1,176367,1,222051,2,163068
+3800,2,96323,207,42243213,1,185705,1,233081,2,172171
+3900,3,101427,195,45620381,1,195267,1,243123,2,181473
+4000,2,106659,195,49173534,1,205198,1,257691,2,191095
+4100,2,111914,217,52904369,1,215877,2,280827,2,201058
+4200,2,117364,228,56799529,2,226350,2,294184,3,211335
+4300,3,123013,248,60876688,1,236865,1,305985,2,221727
+4400,2,128777,233,65153105,1,247813,1,320069,2,232305
+4500,3,134585,245,69617510,1,259036,1,333896,2,243040
+4600,3,140611,290,74301780,2,270941,2,347550,4,253804
+4700,3,146701,292,79204949,1,282759,1,360726,2,264676
+4800,3,152860,327,84304555,2,294990,2,380779,3,275780
+4900,3,159191,345,89622534,2,307124,2,395827,4,287312
+5000,4,165696,452,95198312,2,319846,2,413024,3,299216
+5100,3,172392,460,101008249,2,333197,2,427353,3,311301
+5200,3,179303,356,107050863,2,346359,2,444655,3,323612
+5300,3,186184,504,113337890,2,359889,2,460100,4,336244
+5400,4,193238,537,119884499,2,373608,3,477238,4,348974
+5500,5,200480,509,126679846,2,387923,2,491659,4,362136
+5600,4,207883,506,133717829,2,402237,2,514140,3,375446
+5700,4,215447,437,141024079,2,416822,2,534120,4,389007
+5800,4,223007,435,148611907,2,431653,2,552433,3,402841
+5900,4,230654,448,156467029,2,446640,2,573471,4,416862
+6000,4,238402,461,164552357,2,462153,2,592011,4,431107
+^C
+plotnii@Plotniis-MacBook-Air lab02 % g++ -std=c++17 main.cpp -o t
+plotnii@Plotniis-MacBook-Air lab02 % ./t                         
+6500,6,8606,523,9513276,2,16697,3,19552,4,15624
+7000,5,17650,724,20551577,4,34865,4,41093,6,32557
+7500,7,27483,984,33162534,3,54607,3,63451,5,50932
+8000,5,37957,820,47489242,3,76012,3,97372,6,70854
+8500,6,48951,1039,63679793,4,98452,4,123050,6,92070
+9000,8,60689,1276,81847955,4,121629,4,151440,7,114408
+9500,12,73043,1349,102182171,7,146400,7,179305,10,137767
+10000,9,86105,1514,124794108,6,172520,7,216510,9,162593
+10500,13,99893,1904,149704104,5,199920,5,260576,7,188598
+11000,9,114119,1833,177051673,4,229176,5,291742,8,215656
+11500,9,129184,2683,206858800,6,259289,6,324868,9,244158
+12000,13,144848,2252,239322845,9,291023,9,369210,17,273965
+^C
+plotnii@Plotniis-MacBook-Air lab02 % g++ -std=c++17 main.cpp -o t
+plotnii@Plotniis-MacBook-Air lab02 % ./t                         
+1000,0,1307,11,227788,0,2408,0,2698,0,2227
+2000,1,3982,47,1117587,0,7544,0,9295,1,6657
+3000,1,7838,111,3107521,1,15018,1,17763,1,13838
+4000,2,13070,195,6660674,1,24949,1,32331,2,23460
+5000,3,19575,312,12236452,2,37671,2,49528,3,35364
+6000,4,27323,639,20321780,3,53184,3,68068,5,49609
+7000,5,36367,803,31360081,3,71352,3,89609,5,66542
+8000,6,46841,1154,45686789,3,92757,3,123530,6,86464
+9000,6,58579,1657,63854951,4,115934,5,151920,7,108802
+10000,9,71641,1631,86466888,5,142054,20,189125,12,133628
+11000,14,85867,2189,113814457,5,171310,5,220291,8,160686
+12000,11,101531,1810,146278502,5,203044,6,264633,9,190493
+13000,10,118344,2345,184355112,6,236863,6,306425,10,222901
+14000,15,136688,2594,228642242,7,273592,7,353914,11,258323
+15000,12,156244,2972,279389492,8,314265,8,401580,12,295931
+16000,14,177068,3427,337235993,8,357909,10,482731,14,336721
+17000,14,199182,3822,402244587,9,404617,10,536003,13,380051
+18000,15,222599,4225,475047064,10,453159,10,599512,16,426716
+19000,15,247453,4845,555939455,12,503621,12,657538,16,476069
+20000,19,273468,5227,645422416,11,557250,11,741072,16,527471
+21000,18,300834,5777,744171587,12,612935,12,828830,17,582201
+22000,19,329571,6348,852691519,11,670821,13,900278,20,639236
+23000,21,359747,7574,971198303,13,730989,12,972846,23,697670
+24000,19,391191,7851,1100008170,14,794550,15,1078123,24,759026
+25000,24,423751,8667,1239422765,16,860523,14,1159271,24,823254
+26000,21,457687,10482,1390645141,18,930110,22,1252518,30,889719
+27000,35,492934,10319,1553856059,17,1002925,17,1333712,24,958279
+^C
+plotnii@Plotniis-MacBook-Air lab02 % 
