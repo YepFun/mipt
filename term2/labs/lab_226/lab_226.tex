@@ -108,7 +108,7 @@
 	\textbf{В работе используются:}\\ 
 	стеклянный цилиндр с исследуемой жидкостью (глицерин); \\
 	мелкие шарики (диаметром порядка 1 мм); \\
-	микроскоп отсчетный МПБ-2 ($\sigma = 0.1$ мм); \\
+	микроскоп отсчетный МПБ-2 ($\sigma = 0.05$ мм); \\
 	термостат Julabo CORIOCD-B17: 	\par
 	погрешность поддержания температуры: $dT = 0.03 \, K$; \\
 	секундомер. \\
@@ -394,15 +394,19 @@ $v$ — его скорость.
 		&= \sqrt{\left( \frac{2r \Delta \rho}{v} \sigma_r \right)^2 + \left( \frac{r^2}{v} \sigma_{\Delta \rho} \right)^2 + \left( -\frac{r^2 \Delta \rho}{v^2} \sigma_v \right)^2}
 	\end{align}
 	\begin{equation}
-		\sigma_r = \sigma_r^\text{случ} + \sigma_r^\text{приб} 
+		\sigma_r = \sqrt{\sigma_{r_\text{случ}}^2 + \sigma_{r_\text{приб}}^2}
 	\end{equation}
 	\begin{equation}
-		\sigma_{\Delta \rho} = \sigma_{\rho} + \sigma_{\rho_{\text{ж}}} 
+		\sigma_{\Delta \rho} = \sqrt{\sigma_{\rho}^2 + \sigma_{\rho_{\text{ж}}}^2} 
 	\end{equation}
 	\begin{equation}
-		\sigma_v = \sigma_v^\text{случ} + \sigma_v^\text{приб} = \sigma_v^\text{случ} + v\sqrt{\frac{\sigma_l}{l}^2 + \frac{\sigma_t}{t}^2}
+		\sigma_v = \sqrt{\sigma_{v_\text{случ}}^2 + \sigma_{v\text{приб}}^2} = \sqrt{\sigma_{v_\text{случ}}^2 + v^2 (\frac{\sigma_l}{l}^2 + \frac{\sigma_t}{t}^2)}
 	\end{equation}
-	При расчете погрешности времени учитываем скорость реакции человека: $\sigma_\text{реакции} = 0.3$ с.
+	При расчете погрешности времени учитываем скорость реакции человека: 
+	\begin{equation}
+		\sigma_t^\text{реакции} = 0.3 \cdot 2 = 0.6 \, c
+	\end{equation}
+	
 
 	Вернемся к нашим баранам.
 	\begin{equation}
